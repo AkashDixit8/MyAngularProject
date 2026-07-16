@@ -1,0 +1,56 @@
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 50px;
+    background:#111;
+    color:white;
+}
+
+.logo a{
+    text-decoration:none;
+    color:#d4af37;
+    font-size:32px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+.search input{
+
+    width:350px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:5px;
+
+    outline:none;
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:30px;
+
+}
+
+.nav-links a{
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:#d4af37;
+
+}

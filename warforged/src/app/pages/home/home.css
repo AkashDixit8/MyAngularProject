@@ -1,0 +1,28 @@
+.featured{
+
+    padding:80px 60px;
+    background:#111;
+
+}
+
+.featured h2{
+
+    color:white;
+
+    text-align:center;
+
+    font-size:40px;
+
+    margin-bottom:50px;
+
+}
+
+.products{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}

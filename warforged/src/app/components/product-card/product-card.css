@@ -1,0 +1,53 @@
+.card{
+    background:#1c1c1c;
+    color:white;
+    border-radius:12px;
+    overflow:hidden;
+    padding:20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+}
+
+.card h3{
+    margin:15px 0 10px;
+}
+
+.category{
+    color:#d4af37;
+}
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    background:#d4af37;
+
+    color:black;
+
+    border:none;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:white;
+
+}
