@@ -1,4 +1,4 @@
-name: build angular application
+2name: build angular application
 
 on:
  push:
@@ -13,7 +13,7 @@ jobs:
           - name: Set up node 
             uses: actions/setup-node@v6.5.0
             with: 
-                node-version: 24.x
+                node-version: 22.x
           - name: Install dependencies
             run: npm install
           - name: Build-angular-app
