@@ -22,6 +22,9 @@ jobs:
             run: npm install
           - name: Build-angular-app
             run : npm run build
+          - name: check build output
+            run: ls -la dist
+
               
             
             
