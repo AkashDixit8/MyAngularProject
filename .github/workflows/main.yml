@@ -1,8 +1,8 @@
 name: creating build using cache and artifact
 
 on:
-   push:
-      branches: [main]
+   workflow_dispatch:
+      
 
 jobs:
     build:
