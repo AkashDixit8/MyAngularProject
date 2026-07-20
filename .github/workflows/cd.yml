@@ -1,0 +1,52 @@
+name: Deploy angular application
+
+on:
+ workflow_run:
+      workflows: 
+          - creating build using cache and artifact
+      types: 
+           - completed
+      
+permissions: 
+               contents: read
+               pages: write
+               id-token: write      
+
+jobs:
+   deploy:
+       runs-on: ubuntu-latest
+       if:  ${{ github.event.workflow_run.conclusion == 'success' }}
+
+       environment:
+                name: github-pages
+                url: ${{ steps.deployment.outputs.page_url }}
+
+       steps:   
+            - name: Downloading the artifact
+              uses: actions/download-artifact@v3.1.0
+              with:
+                  name: angular-build
+                  path: artifact
+            - name: Check downloaded artifact
+              run: ls -R artifact
+            - name: Configure Github Pages
+              uses: actions/configure-pages@v6.0.0
+            - name: uploading pages artifact
+              uses: actions/upload-pages-artifact@v5.0.0
+              with:
+                  path: artifact/warforged/browser/
+            - name: Deploying the application
+              id: deployment
+              uses: actions/deploy-pages@v3.0.2-node.24
+            
+                  
+          
+   
+
+
+  
+
+  
+          
+          
+  
