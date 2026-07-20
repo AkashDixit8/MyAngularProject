@@ -1,45 +1,44 @@
-name: creating the angular build using cache and artifact
+name: creating build using cache and artifact
 
 on:
-  push:
-    branches: [main]
-
+   push:
+      branches: [main]
 
 jobs:
-  build:
-     runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
+        defaults:
+            run:
+              working-directory: warforged
 
-     defaults:
-       run:
-        working-directory: warforged
+        concurrency:
+              group: build
+              cancel-in-progress: true
+              
+        steps:
+             - name: checkout repository
+               uses: actions/checkout@v7.0.0
+             - name: setup node js environment
+               uses: actions/setup-node@v6.5.0
+               with:
+                   node-version: 22.x
+                   cache: 'npm'
+                   cache-dependency-path: warforged/package-lock.json
+             - name: install dependencies
+               run: npm ci
+             - name: creating the build
+               run: npm run build -- --base-href /MyAngularProject/
+             - name: checking the build
+               run: ls -la dist/
+             - name : uploading build to artifact
+               uses: actions/upload-artifact@v7.0.1
+               with: 
+                  name: angular-build
+                  path: dist/
 
+     
+              
+              
 
-
-     concurrency:   
-            group: build
-            cancel-in-progress: true
-     steps:
-        - name: checkout repository 
-          uses: actions/checkout@v7.0.0
-        - name: Set up node js environment
-          uses: actions/setup-node@v6.5.0
-          with:
-              node-version: 22.x
-              cache: 'npm'
-              cache-dependency-path: warforged/package-lock.json
-        - name: Install dependencies
-          run: npm ci
-        - name: Create the build
-          run: npm run build -- --base-href /MyAngularProject/
-        - name: check build
-          run: ls -la dist
-        - name: Storing in artifact
-          uses: actions/upload-artifact@v7.0.1
-          with:
-             name: angular-build
-             path: warforged/dist/
-           
-          
-
-         
+        
