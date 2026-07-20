@@ -8,6 +8,7 @@ on:
            - completed
       
 permissions: 
+               actions: read
                contents: read
                pages: write
                id-token: write      
@@ -22,11 +23,14 @@ jobs:
                 url: ${{ steps.deployment.outputs.page_url }}
 
        steps:   
-            - name: Downloading the artifact
-              uses: actions/download-artifact@v4
+            - name: Download Build Artifact
+              uses: actions/download-artifact@v8
               with:
-                  name: angular-build
-                  path: artifact
+                    name: angular-build
+                    github-token: ${{ secrets.GITHUB_TOKEN }}
+                    run-id: ${{ github.event.workflow_run.id }}
+                    path: artifact
+                  
             - name: Check downloaded artifact
               run: ls -R artifact
             - name: Configure Github Pages
