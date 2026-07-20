@@ -1,11 +1,11 @@
 name: Deploy angular application
 
 on:
- workflow_run:
-      workflows: 
-          - creating build using cache and artifact
-      types: 
-           - completed
+ workflow_dispatch: 
+      #workflows: 
+       #   - creating build using cache and artifact
+      #types: 
+          # - completed
       
 permissions: 
                actions: read
