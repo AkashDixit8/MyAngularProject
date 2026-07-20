@@ -1,0 +1,19 @@
+.shop{
+    min-height:100vh;
+    background:#111;
+    padding:120px 80px;
+}
+
+.shop h1{
+    text-align:center;
+    color:#d4af37;
+    font-size:48px;
+    margin-bottom:60px;
+    letter-spacing:3px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:35px;
+}

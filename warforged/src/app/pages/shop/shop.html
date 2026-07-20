@@ -1,12 +1,14 @@
 <section class="shop">
 
-    <h1>SHOP</h1>
+    <h1>TACTICAL COLLECTION</h1>
 
     <div class="products">
 
-        @for(product of products; track product.id){
+        @for (product of products; track product.id) {
 
-            <app-product-card [product]="product"></app-product-card>
+            <app-product-card
+                [product]="product">
+            </app-product-card>
 
         }
 

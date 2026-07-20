@@ -1,1 +1,65 @@
-<p>cart works!</p>
+<section class="cart">
+
+    <h1>Your Cart</h1>
+
+    @if(cartService.getCart().length === 0){
+
+        <h2>Your cart is empty.</h2>
+
+    } @else {
+
+        @for(product of cartService.getCart(); track product.id){
+
+            <div class="cart-item">
+
+                <img [src]="product.image">
+
+                <div class="details">
+
+                    <h2>{{product.name}}</h2>
+
+                    <p>{{product.description}}</p>
+
+                    <h3>₹{{product.price}}</h3>
+
+                </div>
+
+                <div class="quantity">
+
+                    <button
+                        (click)="cartService.decreaseQuantity(product)">
+                        -
+                    </button>
+
+                    <span>{{product.quantity}}</span>
+
+                    <button
+                        (click)="cartService.increaseQuantity(product)">
+                        +
+                    </button>
+
+                </div>
+
+                <button
+                    class="remove-btn"
+                    (click)="cartService.removeFromCart(product)">
+                    Remove
+                </button>
+
+            </div>
+
+        }
+
+        <div class="total">
+
+            <h2>Total : ₹{{cartService.getTotalPrice()}}</h2>
+
+            <button>
+                Proceed To Checkout
+            </button>
+
+        </div>
+
+    }
+
+</section>
