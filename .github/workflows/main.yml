@@ -1,28 +1,45 @@
-name: build angular application
+name: creating build using cache and artifact
 
 on:
- push:
-    branches:  [main]
+   workflow_dispatch:
+      
 
 jobs:
-   build:
-      runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-      defaults:
-          run:
-             working-directory: warforged
+        defaults:
+            run:
+              working-directory: warforged
 
-      steps:
-          - uses: actions/checkout@v7.0.0
-          - name: Set up node 
-            uses: actions/setup-node@v6.5.0
-            with: 
-                node-version: 22.x
-          - name: Install dependencies
-            run: npm install
-          - name: Build-angular-app
-            run : npm run build
+        concurrency:
+              group: build
+              cancel-in-progress: true
               
-            
-            
-               
+        steps:
+             - name: checkout repository
+               uses: actions/checkout@v7.0.0
+             - name: setup node js environment
+               uses: actions/setup-node@v6.5.0
+               with:
+                   node-version: 22.x
+                   cache: 'npm'
+                   cache-dependency-path: warforged/package-lock.json
+             - name: install dependencies
+               run: npm ci
+             - name: creating the build
+               run: npm run build -- --base-href /MyAngularProject/
+             - name: checking the build
+               run: ls -la dist/
+             - name : uploading build to artifact
+               uses: actions/upload-artifact@v4
+               with: 
+                  name: angular-build
+                  path: warforged/dist/
+
+
+     
+              
+              
+
+        
